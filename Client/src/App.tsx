@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react"
 import "./App.css"
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import { Header, Icon, List } from "semantic-ui-react"
 
 const App: React.FC = () => {
-  const [state, setState] = useState({ loading: true, values: [] })
+  //types will be moved in future
+  type value = { name: string; id: number }
+  let values: value[] = []
+  const defaultState = { loading: true, values }
+  const [state, setState] = useState(defaultState)
 
   const getData = async () => {
-    const response = await axios("http://localhost:5000/api/values")
+    const response: AxiosResponse<value[]> = await axios.get(
+      "http://localhost:5000/api/values"
+    )
 
     setState({
       loading: false,
@@ -26,7 +32,7 @@ const App: React.FC = () => {
         <Header.Content>Welcome to Madfunctional LLC</Header.Content>
       </Header>
       <List>
-        {state.values.map((value: any) => (
+        {state.values.map((value: value) => (
           <List.Item key={value.id}>{value.name}</List.Item>
         ))}
       </List>
