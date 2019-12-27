@@ -25,7 +25,7 @@ namespace Application.GameObjects
             public async Task<GameObject> Handle(Query request, CancellationToken cancellationToken)
             {
                 var gameobject = await _context.GameObjects.FindAsync(request.Id);
-                return gameobject.IsValid() ? gameobject : null;
+                return gameobject.IsValid ? gameobject : throw new Exception("This resource is not available");
             }
         }
     }

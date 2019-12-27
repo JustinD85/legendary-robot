@@ -24,7 +24,7 @@ namespace Application.GameObjects
             public async Task<List<GameObject>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var gameobjects = await _context.GameObjects.ToListAsync(cancellationToken);
-                return gameobjects.FindAll(_ => _.IsValid());
+                return gameobjects.FindAll(_ => _.IsValid);
             }
         }
     }

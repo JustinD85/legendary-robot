@@ -27,7 +27,7 @@ namespace Application.GameObjects
                 var gameobject = await _context.GameObjects.FindAsync(request.Id);
                 if (gameobject == null)
                     throw new Exception("Could not Find GameObject with that Id");
-                gameobject.IsDeleted = true;
+                gameobject.IsValid = false;
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
