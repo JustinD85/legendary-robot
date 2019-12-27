@@ -33,7 +33,7 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsValid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -54,7 +54,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsValid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

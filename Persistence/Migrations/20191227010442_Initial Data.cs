@@ -13,7 +13,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
+                    IsValid = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Image = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false)
@@ -29,7 +29,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
+                    IsValid = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.GameObjects;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using HotChocolate.AspNetCore;
+using HotChocolate.AspNetCore.Voyager;
+using HotChocolate;
 using Persistence;
+using Application.Types;
+using Domain;
 
 namespace API
 {
@@ -29,6 +27,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //HotChocolate GraphQL
+            services.AddDataLoaderRegistry();
+            // Add GraphQL Services
+            services.AddGraphQL(sp => SchemaBuilder.New()
+                .AddServices(sp)
+                // enable for authorization support
+                .AddAuthorizeDirectiveType()
+                .AddQueryType<Query>()
+                .AddType<Value>()
+                .AddType<GameObject>()
+                .ModifyOptions(o => o.RemoveUnreachableTypes = true)
+                .Create());
+            //HotChocolate GraphQL
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
@@ -58,7 +69,12 @@ namespace API
             // app.UseHttpsRedirection();
 
             app.UseCors("CorsPolicy");
-            app.UseRouting();
+            app
+            .UseRouting()
+            .UseWebSockets()
+            .UseGraphQL()
+            .UsePlayground()
+            .UseVoyager();
 
             app.UseAuthorization();
 

@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191227000030_Initial Data")]
+    [Migration("20191227010442_Initial Data")]
     partial class InitialData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsValid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -56,7 +56,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsValid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
