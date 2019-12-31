@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Persistence;
 
-namespace Application.GameObjects
+namespace Application.RestAPI
 {
     public class Edit
     {
@@ -31,19 +31,19 @@ namespace Application.GameObjects
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
 
-                var gameobject = await _context.GameObjects.FindAsync(request.Id);
-                if (gameobject == null)
-                    throw new Exception("Could not find GameObject");
+                var pawn = await _context.Pawns.FindAsync(request.Id);
+                if (pawn == null)
+                    throw new Exception("Could not find pawn");
 
-                gameobject.Date = new DateTime();
-                gameobject.Description = request.Description ?? gameobject.Description;
-                gameobject.Image = request.Image ?? gameobject.Image;
-                gameobject.Name = request.Name ?? gameobject.Name;
+                pawn.UpdatedAt = DateTime.Now;
+                pawn.Description = request.Description ?? pawn.Description;
+                pawn.Image = request.Image ?? pawn.Image;
+                pawn.Name = request.Name ?? pawn.Name;
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
 
-                throw new Exception("Error while attempting to edit gameobject");
+                throw new Exception("Error while attempting to edit pawn");
             }
         }
     }

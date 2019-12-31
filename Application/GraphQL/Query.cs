@@ -1,11 +1,7 @@
-using Application.GraphQL.Types;
-
-namespace Application.Types
+namespace Application.GraphQL
 {
     public class Query
     {
-        public GameObject GameObject() => new GameObject();
-        public Value Value() => new Value();
-
+        //Will have all top lvl queries here
     }
 }

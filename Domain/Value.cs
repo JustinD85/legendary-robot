@@ -1,7 +1,10 @@
-﻿namespace Domain
+﻿using System;
+
+namespace Domain
 {
-    public class Value : DomainBase
+    public class Value
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

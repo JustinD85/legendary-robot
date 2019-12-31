@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Persistence;
 
-namespace Application.GameObjects
+namespace Application.RestAPI
 {
     public class Delete
     {
@@ -24,15 +24,15 @@ namespace Application.GameObjects
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
 
-                var gameobject = await _context.GameObjects.FindAsync(request.Id);
-                if (gameobject == null)
-                    throw new Exception("Could not Find GameObject with that Id");
-                gameobject.IsValid = false;
+                var pawn = await _context.Pawns.FindAsync(request.Id);
+                if (pawn == null)
+                    throw new Exception("Could not Find Pawn with that Id");
+                pawn.IsDeleted = true;
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
 
-                throw new Exception("Could not delete Game Object");
+                throw new Exception("Could not delete Pawn Object");
             }
         }
     }

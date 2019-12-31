@@ -2,38 +2,40 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.GameObjects;
-using Domain;
+using Application.RestAPI;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Domain.Interfaces; //TODO: POCO's instead of Domain objects
+using Domain.Concrete; //TODO: POCO's instead of Domain objects
 
+//Message passing with MediatR
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GameObjectsController : ControllerBase
+    public class PawnsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public GameObjectsController(IMediator mediator)
+        public PawnsController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GameObject>>> List(CancellationToken ct)
+        public async Task<List<Pawn>> List(CancellationToken ct)
         {
             return await _mediator.Send(new List.Query(), ct);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GameObject>> Details(Guid id)
+        public async Task<IActor> Details(Guid id)
         {
             return await _mediator.Send(new Details.Query { Id = id });
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create(Create.Command command)
+        public async Task<ActionResult<Guid>> Create(Application.RestAPI.Create.Command command)
         {
             return await _mediator.Send(command);
         }

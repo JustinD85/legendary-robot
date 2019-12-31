@@ -1,12 +1,11 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain;
 using MediatR;
 using Persistence;
+using Domain.Concrete;
 
-namespace Application.GameObjects
+namespace Application.RestAPI
 {
     public class Create
     {
@@ -29,19 +28,12 @@ namespace Application.GameObjects
 
             public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
             {
-                var gameobject = new GameObject
-                {
-                    Id = new Guid(),
-                    Name = request.Name,
-                    Image = request.Image,
-                    Description = request.Description,
-                    Date = request.Date
-                };
+                var pawn = new Pawn(request.Name, request.Description, request.Image);
 
-                _context.GameObjects.Add(gameobject);
+                _context.Actors.Add(pawn);
 
                 var success = await _context.SaveChangesAsync() > 0;
-                if (success) return gameobject.Id;
+                if (success) return pawn.Id;
 
                 throw new Exception("Issue saving new Game Object");
             }
