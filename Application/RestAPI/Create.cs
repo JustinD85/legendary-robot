@@ -30,7 +30,7 @@ namespace Application.RestAPI
             {
                 var pawn = new Pawn(request.Name, request.Description, request.Image);
 
-                _context.Actors.Add(pawn);
+                _context.Pawns.Add(pawn);
 
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return pawn.Id;

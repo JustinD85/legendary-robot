@@ -11,30 +11,18 @@ namespace Persistence
     {
         public static void SeedData(DataContext context)
         {
-            if (!context.Potions.Any())
-            {
-                var actors = new List<Potion>();
-                var idx = 0;
+            // if (!context.Potions.Any())
+            // {
+            //     var actors = new List<Potion>();
+            //     var idx = 0;
 
-                foreach (var gameobject in Enumerable.Range(0, 100))
-                {
-                    idx++;
-                    actors.Add(new Potion($"Potion -- {idx}", $"Description -- {idx}", 0));
-                }
-                context.AddRange(actors);
-            }
-            if (!context.Buildings.Any())
-            {
-                var actors = new List<Building>();
-                var idx = 0;
-
-                foreach (var gameobject in Enumerable.Range(0, 100))
-                {
-                    idx++;
-                    actors.Add(new Building($"Building -- {idx}", $"Description -- {idx}"));
-                }
-                context.AddRange(actors);
-            }
+            //     foreach (var gameobject in Enumerable.Range(0, 100))
+            //     {
+            //         idx++;
+            //         actors.Add(new Potion($"Potion -- {idx}", $"Description -- {idx}", 0));
+            //     }
+            //     context.AddRange(actors);
+            // }
             if (!context.Pawns.Any())
             {
                 var actors = new List<Pawn>();
@@ -49,6 +37,21 @@ namespace Persistence
                 }
                 context.AddRange(actors);
             }
+
+
+            /// NOT currently supporting below here ///
+            // if (!context.Buildings.Any())
+            // {
+            //     var actors = new List<Building>();
+            //     var idx = 0;
+
+            //     foreach (var gameobject in Enumerable.Range(0, 100))
+            //     {
+            //         idx++;
+            //         actors.Add(new Building($"Building -- {idx}", $"Description -- {idx}"));
+            //     }
+            //     context.AddRange(actors);
+            // }
 
             if (!context.Values.Any())
             {

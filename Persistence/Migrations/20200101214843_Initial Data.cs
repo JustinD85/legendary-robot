@@ -8,7 +8,7 @@ namespace Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actors",
+                name: "Pawns",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -17,21 +17,12 @@ namespace Persistence.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    Quantity = table.Column<int>(nullable: true),
-                    PawnId = table.Column<Guid>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    AC = table.Column<int>(nullable: true)
+                    AC = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Actors_Actors_PawnId",
-                        column: x => x.PawnId,
-                        principalTable: "Actors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Pawns", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,19 +37,46 @@ namespace Persistence.Migrations
                     table.PrimaryKey("PK_Values", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    PawnId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Items_Pawns_PawnId",
+                        column: x => x.PawnId,
+                        principalTable: "Pawns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Actors_PawnId",
-                table: "Actors",
+                name: "IX_Items_PawnId",
+                table: "Items",
                 column: "PawnId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Actors");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Values");
+
+            migrationBuilder.DropTable(
+                name: "Pawns");
         }
     }
 }

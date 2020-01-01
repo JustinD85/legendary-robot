@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200101130607_Initial Data")]
+    [Migration("20200101214843_Initial Data")]
     partial class InitialData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0");
 
-            modelBuilder.Entity("Domain.Interfaces.AActor", b =>
+            modelBuilder.Entity("Domain.Concrete.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,8 +31,46 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Discriminator")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("PawnId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PawnId");
+
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Domain.Concrete.Pawn", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AC")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
@@ -47,9 +85,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AActor");
+                    b.ToTable("Pawns");
                 });
 
             modelBuilder.Entity("Domain.Value", b =>
@@ -64,48 +100,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Values");
-                });
-
-            modelBuilder.Entity("Domain.Concrete.Building", b =>
-                {
-                    b.HasBaseType("Domain.Interfaces.AActor");
-
-                    b.HasDiscriminator().HasValue("Building");
-                });
-
-            modelBuilder.Entity("Domain.Concrete.Item", b =>
-                {
-                    b.HasBaseType("Domain.Interfaces.AActor");
-
-                    b.Property<Guid?>("PawnId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.HasIndex("PawnId");
-
-                    b.HasDiscriminator().HasValue("Item");
-                });
-
-            modelBuilder.Entity("Domain.Concrete.Pawn", b =>
-                {
-                    b.HasBaseType("Domain.Interfaces.AActor");
-
-                    b.Property<int>("AC")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("Pawn");
-                });
-
-            modelBuilder.Entity("Domain.Potion", b =>
-                {
-                    b.HasBaseType("Domain.Concrete.Item");
-
-                    b.HasDiscriminator().HasValue("Potion");
                 });
 
             modelBuilder.Entity("Domain.Concrete.Item", b =>

@@ -13,10 +13,8 @@ namespace Domain.Concrete
     public class Pawn : AActor, IPawn
     {
         public Pawn() { }
-        public Pawn(string name, string description, string image) //: base(name, description)
+        public Pawn(string name, string description, string image) : base(name, description)
         {
-            Description = description;
-            Name = name;
             Image = image;
         }
 
