@@ -11,6 +11,6 @@ namespace Application.GraphQL.Queries
     public class ItemQueries
     {
         public IQueryable<IItem> Items([Service]IItemRepository data) => data.All();
-        public IItem Item(Guid Id, [Service]IItemRepository data) => data.Item(Id);
+        public IItem Item(Guid id, [Service]IItemRepository data) => data.Item(id);
     }
 }

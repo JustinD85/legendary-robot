@@ -7,8 +7,8 @@ const App: React.FC = () => {
   //types will be moved in future
   type gameobject = {
     id: string
-    date: Date
-    isValid: boolean
+    createdAt: Date
+    updatedAt: Date
     name: string
     image: string
     description: string
@@ -19,7 +19,7 @@ const App: React.FC = () => {
 
   const getData = async () => {
     const response: AxiosResponse<gameobject[]> = await axios.get(
-      "http://localhost:5000/api/gameobjects"
+      "http://localhost:5000/api/pawns"
     )
 
     setState({
@@ -44,13 +44,17 @@ const App: React.FC = () => {
           <List.Item key={gameobject.id}>
             Name: {gameobject.name}
             <hr />
+            Created: {new Date(gameobject.createdAt).toDateString()}
+            <hr />
+            Updated: {new Date(gameobject.updatedAt).toDateString()}
+            <hr />
             <img src={gameobject.image} alt='placeholder' />
             <hr />
             Description: {gameobject.description}
-            <hr />
-            Created: {new Date(gameobject.date).toDateString()}
-            <hr />
-            Valid: {String(gameobject.isValid)}
+            <br />
+            <br />
+            <br />
+            <br />
           </List.Item>
         ))}
       </List>

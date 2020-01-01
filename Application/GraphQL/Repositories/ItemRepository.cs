@@ -36,7 +36,7 @@ namespace Application.GraphQL.Repositories
 
         public IItem Item(Guid id)
         {
-            throw new NotImplementedException();//_data.Items.Find(id);
+            return _data.Items.Find(id);
         }
 
         public IEnumerable<ISearchResult> Searches(string text)

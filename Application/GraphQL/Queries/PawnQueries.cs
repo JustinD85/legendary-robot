@@ -11,6 +11,6 @@ namespace Application.GraphQL.Queries
     public class PawnQueries
     {
         public IQueryable<IPawn> Pawns([Service]IPawnRepository data) => data.Pawns();
-        public IPawn Pawn(Guid Id, [Service]IPawnRepository data) => data.Pawn(Id);
+        public IPawn Pawn(Guid id, [Service]IPawnRepository data) => data.Pawn(id);
     }
 }

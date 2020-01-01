@@ -8,10 +8,10 @@ namespace Application.GraphQL.Repositories
     public interface IItemRepository
     {
         IQueryable<IItem> All();
-        IEnumerable<IItem> All(params Guid[] Ids);
-        IEnumerable<IItem> All(params string[] Name);
-        IEnumerable<ISearchResult> Searches(string Text);
+        IEnumerable<IItem> All(params Guid[] ids);
+        IEnumerable<IItem> All(params string[] name);
+        IEnumerable<ISearchResult> Searches(string text);
         IItem Item(string name);
-        IItem Item(Guid Id);
+        IItem Item(Guid id);
     }
 }

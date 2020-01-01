@@ -11,9 +11,9 @@ namespace Persistence
     {
         public static void SeedData(DataContext context)
         {
-            if (!context.Items.Any())
+            if (!context.Potions.Any())
             {
-                var actors = new List<AActor>();
+                var actors = new List<Potion>();
                 var idx = 0;
 
                 foreach (var gameobject in Enumerable.Range(0, 100))
@@ -25,7 +25,7 @@ namespace Persistence
             }
             if (!context.Buildings.Any())
             {
-                var actors = new List<AActor>();
+                var actors = new List<Building>();
                 var idx = 0;
 
                 foreach (var gameobject in Enumerable.Range(0, 100))
@@ -37,13 +37,14 @@ namespace Persistence
             }
             if (!context.Pawns.Any())
             {
-                var actors = new List<AActor>();
+                var actors = new List<Pawn>();
                 var idx = 0;
 
                 foreach (var gameobject in Enumerable.Range(0, 100))
                 {
                     idx++;
                     var pawn = new Pawn($"Pawn -- {idx}", $"Description -- {idx}", "https://cdn.discordapp.com/attachments/643545635005530112/656123992356159499/Baal_a.jpg");
+                    pawn.Items.Add(new Potion($"Potion -- {idx + 100}", $"Description -- {idx + 100}", 0));
                     actors.Add(pawn);
                 }
                 context.AddRange(actors);
