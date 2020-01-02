@@ -1,56 +1,41 @@
 import React, { useState, useEffect } from "react"
 import "./App.css"
-import axios, { AxiosResponse } from "axios"
-import { Header, Icon, List } from "semantic-ui-react"
+import axios from "axios"
+import { List } from "semantic-ui-react"
+import { IPawn, IItem } from "../models"
+import VerticalMenuContainer from "../containers/Menus/VerticalWithHeaderContainer"
 
 const App: React.FC = () => {
-  //types will be moved in future
-  type gameobject = {
-    id: string
-    createdAt: Date
-    updatedAt: Date
-    name: string
-    image: string
-    description: string
-  }
-  let gameobjects: gameobject[] = []
-  const defaultState = { loading: true, gameobjects }
-  const [state, setState] = useState(defaultState)
+  const [pawns, setPawns] = useState<IPawn[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [items, setItems] = useState<IItem[]>([])
 
   const getData = async () => {
-    const response: AxiosResponse<gameobject[]> = await axios.get(
-      "http://localhost:5000/api/pawns"
-    )
+    const response = await axios.get<IPawn[]>("http://localhost:5000/api/pawns")
 
-    setState({
-      loading: false,
-      gameobjects: response.data
-    })
+    setPawns(response.data)
+    setIsLoading(false)
   }
 
   useEffect(() => {
     getData()
   }, [])
-  console.log(state)
 
   return (
-    <>
-      <Header as='h1'>
-        <Icon name='code' />
-        <Header.Content>Welcome to Madfunctional LLC</Header.Content>
-      </Header>
-      <List>
-        {state.gameobjects.map((gameobject: gameobject) => (
-          <List.Item key={gameobject.id}>
-            Name: {gameobject.name}
+    <div style={{ display: "flex" }}>
+      <VerticalMenuContainer />
+      <List style={{ height: "100vh", overflow: "scroll" }}>
+        {pawns.map((pawn: IPawn) => (
+          <List.Item key={pawn.id}>
+            Name: {pawn.name}
             <hr />
-            Created: {new Date(gameobject.createdAt).toDateString()}
+            Created: {new Date(pawn.createdAt).toDateString()}
             <hr />
-            Updated: {new Date(gameobject.updatedAt).toDateString()}
+            Updated: {new Date(pawn.updatedAt).toDateString()}
             <hr />
-            <img src={gameobject.image} alt='placeholder' />
+            <img src={pawn.image} alt='placeholder' />
             <hr />
-            Description: {gameobject.description}
+            Description: {pawn.description}
             <br />
             <br />
             <br />
@@ -58,7 +43,7 @@ const App: React.FC = () => {
           </List.Item>
         ))}
       </List>
-    </>
+    </div>
   )
 }
 export default App

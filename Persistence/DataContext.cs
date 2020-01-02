@@ -1,6 +1,5 @@
 ﻿using Domain;
 using Domain.Concrete;
-using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
@@ -14,7 +13,6 @@ namespace Persistence
         /*
             comment/uncomment things you do/don't want to query against.
             Then migrate the Database.
-            I use the single-table discreminator pattern.
         */
 
         public DbSet<Value> Values { get; set; }

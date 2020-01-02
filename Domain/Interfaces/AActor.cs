@@ -14,7 +14,7 @@ namespace Domain.Interfaces
         string Description { get; set; }
     }
 
-    public abstract class AActor : IActor
+    public abstract class AActor : IActor, ISearchResult
     {
         public AActor(string name, string description)
         {
