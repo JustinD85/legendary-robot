@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import "./App.css"
 import axios from "axios"
-import { List } from "semantic-ui-react"
+import { List, Grid } from "semantic-ui-react"
 import { IPawn, IItem } from "../models"
 import VerticalMenuContainer from "../containers/Menus/VerticalWithHeaderContainer"
 
@@ -22,28 +22,47 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <div style={{ display: "flex" }}>
-      <VerticalMenuContainer />
-      <List style={{ height: "100vh", overflow: "scroll" }}>
-        {pawns.map((pawn: IPawn) => (
-          <List.Item key={pawn.id}>
-            Name: {pawn.name}
-            <hr />
-            Created: {new Date(pawn.createdAt).toDateString()}
-            <hr />
-            Updated: {new Date(pawn.updatedAt).toDateString()}
-            <hr />
-            <img src={pawn.image} alt='placeholder' />
-            <hr />
-            Description: {pawn.description}
-            <br />
-            <br />
-            <br />
-            <br />
-          </List.Item>
-        ))}
-      </List>
-    </div>
+    <Grid celled>
+      <Grid.Column width={3}>
+        <VerticalMenuContainer />
+      </Grid.Column>
+      <Grid.Column width={13}>
+        <List
+          style={{
+            height: "100vh",
+            display: "flex",
+            flexWrap: "wrap",
+            overflow: "scroll",
+            justifyContent: "center"
+          }}
+        >
+          {pawns.map((pawn: IPawn) => (
+            <List.Item key={pawn.id} style={{ width: "300px", margin: "10px" }}>
+              Name: {pawn.name}
+              <hr />
+              ID: {pawn.id}
+              <hr />
+              Created: {new Date(pawn.createdAt).toDateString()}
+              <hr />
+              Updated: {new Date(pawn.updatedAt).toDateString()}
+              <hr />
+              <img
+                src={pawn.image}
+                style={{ width: "100%" }}
+                alt='placeholder'
+              />
+              <hr />
+              Description: {pawn.description}
+              <br />
+              <br />
+              <br />
+              <br />
+              {/* Replace with Card Component */}
+            </List.Item>
+          ))}
+        </List>
+      </Grid.Column>
+    </Grid>
   )
 }
 export default App

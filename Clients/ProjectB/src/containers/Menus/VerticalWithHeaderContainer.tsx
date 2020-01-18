@@ -1,5 +1,5 @@
 import React from "react"
-import VerticalMenu from "../../components/Menus/VerticalMenu"
+import VerticalMenu from "../../components/Menus/VerticalMenu/VerticalMenu"
 
 export default () => <VerticalMenu menuItems={menuItems} />
 
