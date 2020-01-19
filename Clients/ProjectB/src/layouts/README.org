@@ -1,0 +1,2 @@
+* Properties
+** has styling appropriate for sections of a page such as width for desktop vs width for mobile

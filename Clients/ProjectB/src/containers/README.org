@@ -1,0 +1,3 @@
+* Properties
+** Have access to external data/store
+** Composed of components

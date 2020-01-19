@@ -1,0 +1,7 @@
+* Properties
+** Top level logic is done here
+*** Setup of datastore
+*** Tracking History
+*** Determining Data source for page
+*** Routing
+** Pages are used here only

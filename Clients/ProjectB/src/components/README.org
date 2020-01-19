@@ -1,0 +1,4 @@
+* Properties
+** No external data access
+** Composed of simple elements
+** Are pure functions
