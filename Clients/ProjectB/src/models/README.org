@@ -1,0 +1,1 @@
+* Type checking shared throughout the application

@@ -1,6 +1,0 @@
-* Properties
-** Has styling appropriate for whole page -- grid/flex, flex-wrap, 12cols or 16cols, etc..
-** Composed of layouts
-** Used to house variations of same page
-*** Example: HomePageWithBannerNoMenu || HomePageDefault , these would be imported to pages as HomePage regardless of which type was selected.
-*** Important to note here that NO underlying data is changed only PRESENTATION is changed.

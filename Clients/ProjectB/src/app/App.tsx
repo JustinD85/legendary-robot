@@ -1,8 +1,6 @@
 import React from "react"
 import "./App.css"
-import { Grid } from "semantic-ui-react"
-import VerticalMenuContainer from "../containers/Menus/VerticalWithHeaderContainer"
-import PawnContainer from "../containers/Lists/Pawn/PawnContainer"
+import { PawnEditor } from "../pages"
 
 //Apps purpose is to track where you are in the Application
 //It should have no knowledge past Pages
@@ -10,17 +8,8 @@ import PawnContainer from "../containers/Lists/Pawn/PawnContainer"
 //TODO: Implement Layouts
 //TODO: Implement Templates
 //TODO: Implement Pages
+//TODO: Implement Styling only under Pages
 
-const App: React.FC = () => {
-  return (
-    <Grid celled>
-      <Grid.Column width={3}>
-        <VerticalMenuContainer />
-      </Grid.Column>
-      <Grid.Column width={13}>
-        <PawnContainer />
-      </Grid.Column>
-    </Grid>
-  )
-}
+const App: React.FC = () => <PawnEditor />
+
 export default App
