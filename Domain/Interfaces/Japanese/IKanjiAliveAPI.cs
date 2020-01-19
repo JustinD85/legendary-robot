@@ -1,53 +1,61 @@
-namespace Application.ProjectA
+using System;
+using System.Collections.Generic;
+
+namespace Domain.Interfaces.Japanese
 {
     public interface IKanjiAliveAPI
     {
-        IKanji Kanji { get; set; }
+        Kanji Kanji { get; set; }
         Radical Radical { get; set; }
-        References references { get; set; }
-        Example[] Examples { get; set; }
+        References References { get; set; }
+        List<Example> Examples { get; set; }
     }
 
-    public interface IKanji
+    public class Kanji
     {
-        string character { get; set; }
-        Meaning meaning { get; set; }
-        Strokes strokes { get; set; }
-        Onyomi onyomi { get; set; }
-        Kunyomi kunyomi { get; set; }
-        Video video { get; set; }
-
-    }
-
-    public interface Radical
-    {
-        string character { get; set; }
-        int strokes { get; set; }
-        string image { get; set; }
-        Position position { get; set; }
-        Name name { get; set; }
-        Meaning meaning { get; set; }
-        string[] animation { get; set; }
-    }
-
-    public interface References
-    {
-        short grade { get; set; }
-        short kodansha { get; set; }
-        short classicNelson { get; set; }
-    }
-
-    public interface Example
-    {
-        string Japanese { get; set; }
-        Meaning Meaning { get; set; }
-        Audio Audio { get; set; }
+        public Guid Id { get; set; }
+        public string character { get; set; }
+        public Meaning meaning { get; set; }
+        public Strokes strokes { get; set; }
+        public Onyomi onyomi { get; set; }
+        public Kunyomi kunyomi { get; set; }
+        public Video video { get; set; }
 
     }
 
-
-    public struct Audio
+    public class Radical
     {
+        public Guid Id { get; set; }
+        public string character { get; set; }
+        public int strokes { get; set; }
+        public string image { get; set; }
+        public Position position { get; set; }
+        public Name name { get; set; }
+        public Meaning meaning { get; set; }
+        public List<Animation> animation { get; set; }
+    }
+
+    public class References
+    {
+        public Guid Id { get; set; }
+        public short grade { get; set; }
+        public short kodansha { get; set; }
+        public short classicNelson { get; set; }
+    }
+
+    public class Example
+    {
+        public Guid Id { get; set; }
+        public string Japanese { get; set; }
+        public Meaning Meaning { get; set; }
+        public Audio Audio { get; set; }
+
+    }
+
+
+    public class Audio
+    {
+        public Guid Id { get; set; }
         public string opus { get; set; }
         public string aac { get; set; }
         public string ogg { get; set; }
@@ -56,44 +64,69 @@ namespace Application.ProjectA
 
 
 
-    public struct Position
+    public class Position
     {
+        public Guid Id { get; set; }
         public string hiragana { get; set; }
         public string romaji { get; set; }
         public string icon { get; set; }
     }
-    public struct Name
+    public class Name
     {
+        public Guid Id { get; set; }
         public string hiragana { get; set; }
         public string romaji { get; set; }
     }
-    public struct Meaning
+    public class Meaning
     {
+        public Guid Id { get; set; }
         public string english { get; set; }
     }
 
-    public struct Strokes
+    public class Strokes
     {
+        public Guid Id { get; set; }
         public int count { get; set; }
-        public float[] timings { get; set; }
-        public string[] images { get; set; }
+        public List<Timing> timings { get; set; }
+        public List<Image> images { get; set; }
     }
-    public struct Onyomi
+    public class Timing
     {
+        public Guid Id { get; set; }
+        public string time { get; set; }
+    }
+
+    public class Image
+    {
+        public Guid Id { get; set; }
+        public string image { get; set; }
+    }
+
+
+    public class Onyomi
+    {
+        public Guid Id { get; set; }
         public string romaji { get; set; }
         public string katakana { get; set; }
     }
 
-    public struct Kunyomi
+    public class Kunyomi
     {
+        public Guid Id { get; set; }
         public string romaji { get; set; }
         public string hiragana { get; set; }
     }
-    public struct Video
+    public class Video
     {
+        public Guid Id { get; set; }
         public string poster { get; set; }
         public string mp4 { get; set; }
         public string webm { get; set; }
+    }
+    public class Animation
+    {
+        public Guid Id { get; set; }
+        public string animation { get; set; }
     }
 
 }

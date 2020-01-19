@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Concrete;
+using Domain.Concrete.KanjiAliveAPI;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
@@ -23,6 +24,7 @@ namespace Persistence
         // public DbSet<Building> Buildings { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Pawn> Pawns { get; set; }
+        public DbSet<KanjiAliveAPI> Kanji { get; set; }
 
         //Specific
         // public DbSet<Potion> Potions { get; set; }
