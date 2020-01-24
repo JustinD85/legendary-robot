@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import { Menu } from "semantic-ui-react"
 
 interface IProps {
@@ -11,11 +11,11 @@ interface IProps {
   setActiveItemName: (id: string) => void
 }
 
-export const VerticalMenuItems: React.FC<IProps> = ({
+const MenuItems = ({
   menuItems,
   activeItemName,
   setActiveItemName
-}) => {
+}: IProps) => {
   const [{ header, names }, ...rest] = menuItems
 
   return (
@@ -34,7 +34,7 @@ export const VerticalMenuItems: React.FC<IProps> = ({
       </Menu.Item>
 
       {!!rest.length && (
-        <VerticalMenuItems
+        <MenuItems
           menuItems={rest}
           activeItemName={activeItemName}
           setActiveItemName={setActiveItemName}
@@ -43,3 +43,5 @@ export const VerticalMenuItems: React.FC<IProps> = ({
     </>
   )
 }
+
+export default MenuItems

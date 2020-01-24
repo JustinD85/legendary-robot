@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import Pawn from "../../../components/Lists/Pawn/Pawn"
-import { IPawn } from "../../../models"
+import Pawns from "../../components/Pawn/PawnList"
+import { IPawn } from "../../models"
 
 export default () => {
   const [pawns, setPawns] = useState<IPawn[]>([])
@@ -15,6 +15,5 @@ export default () => {
   useEffect(() => {
     getData()
   }, [])
-
-  return <Pawn pawns={pawns} />
+  return <Pawns pawns={pawns} />
 }

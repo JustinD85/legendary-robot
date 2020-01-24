@@ -1,6 +1,7 @@
 import React from "react"
 import "./App.css"
-import { PawnEditor } from "../pages"
+import PawnEditor from "../pages/templates/TEditor"
+import Navigation from "../pages/templates/TNavigation"
 
 //Apps purpose is to track where you are in the Application
 //It should have no knowledge past Pages
@@ -10,6 +11,11 @@ import { PawnEditor } from "../pages"
 //TODO: Implement Pages
 //TODO: Implement Styling only under Pages
 
-const App: React.FC = () => <PawnEditor />
+const App: React.FC = () => (
+  <>
+    <Navigation />
+    <PawnEditor />
+  </>
+)
 
 export default App
