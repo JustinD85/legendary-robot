@@ -3,7 +3,12 @@ import axios from "axios"
 import Pawns from "../../components/Pawn/PawnList"
 import { IPawn } from "../../models"
 
-export default () => {
+interface IProps {
+  handleSelectPawn: (pawn: IPawn) => void
+}
+
+//TODO: Until implement store, use props
+export default ({ handleSelectPawn }: IProps) => {
   const [pawns, setPawns] = useState<IPawn[]>([])
 
   const getData = async () => {
@@ -15,5 +20,5 @@ export default () => {
   useEffect(() => {
     getData()
   }, [])
-  return <Pawns pawns={pawns} />
+  return <Pawns pawns={pawns} handleSelectPawn={handleSelectPawn} />
 }

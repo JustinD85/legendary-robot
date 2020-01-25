@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
+import React from "react"
 import Pawn from "../../components/Pawn/PawnDetail"
 import { IPawn } from "../../models"
+import { Segment } from "semantic-ui-react"
 
-export default () => {
-  const [pawns, setPawns] = useState<IPawn[]>([])
+interface IProps {
+  pawn: IPawn | null
+  handleEdit: (setEditMode: boolean) => void
+  handleCancel: () => void
+}
 
-  const getData = async () => {
-    const response = await axios.get<IPawn[]>("http://localhost:5000/api/pawns")
-
-    setPawns(response.data)
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
-
-  return !!pawns.length ? <Pawn pawn={pawns[0]} /> : <div>Select Card</div>
+//TODO: Until store implemented, will use props
+export default ({ handleEdit, pawn, handleCancel }: IProps) => {
+  return !!pawn ? (
+    <Pawn pawn={pawn} handleEdit={handleEdit} handleCancel={handleCancel} />
+  ) : (
+    <Segment textAlign='center'>Select Card</Segment>
+  )
 }

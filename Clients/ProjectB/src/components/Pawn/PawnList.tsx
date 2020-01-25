@@ -8,9 +8,10 @@ import Pawn from "./Pawn"
 
 interface IProps {
   pawns: IPawn[]
+  handleSelectPawn: (pawn: IPawn) => void
 }
 
-export default ({ pawns }: IProps) => {
+export default ({ pawns, handleSelectPawn }: IProps) => {
   return (
     <Container>
       <List
@@ -22,7 +23,7 @@ export default ({ pawns }: IProps) => {
         }}
       >
         {pawns.map((pawn: IPawn) => (
-          <Pawn key={pawn.id} pawn={pawn} />
+          <Pawn key={pawn.id} pawn={pawn} handleSelectPawn={handleSelectPawn} />
         ))}
       </List>
     </Container>
