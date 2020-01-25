@@ -10,6 +10,8 @@ import Navigation from "../pages/templates/TNavigation"
 //TODO: Implement Templates
 //TODO: Implement Pages
 //TODO: Implement Styling only under Pages
+//TODO: Implement Mobx
+//TODO: Implement Routing
 
 const App: React.FC = () => (
   <>
